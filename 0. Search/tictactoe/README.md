@@ -1,25 +1,16 @@
 Tic-Tac-Toe
 Using Minimax, implement an AI to play Tic-Tac-Toe optimally.
 
-Tic-Tac-Toe Game
+![Tic-Tac-Toe Game](https://cs50.harvard.edu/ai/projects/0/tictactoe/images/game.png)
 
-When to Do It
-By Fri, Jan 1, 2021 5:59 AM CET.
-
-How to Get Help
-Ask questions on Ed!
-Ask questions on CS50’s various online fora!
-Getting Started
-Download the distribution code from https://cdn.cs50.net/ai/2020/x/projects/0/tictactoe.zip and unzip it.
-Once in the directory for the project, run pip3 install -r requirements.txt to install the required Python package (pygame) for this project.
-Understanding
+# Understanding
 There are two main files in this project: runner.py and tictactoe.py. tictactoe.py contains all of the logic for playing the game, and for making optimal moves. runner.py has been implemented for you, and contains all of the code to run the graphical interface for the game. Once you’ve completed all the required functions in tictactoe.py, you should be able to run python runner.py to play against your AI!
 
 Let’s open up tictactoe.py to get an understanding for what’s provided. First, we define three variables: X, O, and EMPTY, to represent possible moves of the board.
 
 The function initial_state returns the starting state of the board. For this problem, we’ve chosen to represent the board as a list of three lists (representing the three rows of the board), where each internal list contains three values that are either X, O, or EMPTY. What follows are functions that we’ve left up to you to implement!
 
-Specification
+# Specification
 Complete the implementations of player, actions, result, winner, terminal, utility, and minimax.
 
 The player function should take a board state as input, and return which player’s turn it is (either X or O).
