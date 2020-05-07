@@ -81,24 +81,35 @@ def get_model():
     `input_shape` of the first layer is `(IMG_WIDTH, IMG_HEIGHT, 3)`.
     The output layer should have `NUM_CATEGORIES` units, one for each category.
     """
-    # The model (adjustable).
     model = tf.keras.models.Sequential([
-        tf.keras.layers.Conv2D(16, 3, padding='same', activation='relu', 
-                               input_shape=(IMG_HEIGHT, IMG_WIDTH, 3)),
-        tf.keras.layers.MaxPooling2D(pool_size=(2, 2)),
-        tf.keras.layers.Dropout(0.5),
-        tf.keras.layers.Conv2D(64, 3, padding='same', activation='relu'),
-        tf.keras.layers.MaxPooling2D(pool_size=(2, 2)),
-        tf.keras.layers.Dropout(0.5),
+        
+        # Input layer.
+        tf.keras.layers.Conv2D(32, (3, 3), activation='relu', 
+                               input_shape=(IMG_WIDTH, IMG_HEIGHT, 3)),
+        tf.keras.layers.MaxPooling2D(pool_size=(3, 3)),
         tf.keras.layers.Flatten(),
-        tf.keras.layers.Dense(128, activation='relu'),
-        tf.keras.layers.Dense(NUM_CATEGORIES)
+        tf.keras.layers.Dropout(0.2),
+
+        # Hidden layer with dropout
+        tf.keras.layers.Dense(NUM_CATEGORIES * 32, activation='relu'),
+        tf.keras.layers.Dropout(0.2),
+
+        # Hidden layer.
+        tf.keras.layers.Dense(NUM_CATEGORIES * 16, activation='relu'),
+
+        # Hidden layer.
+        tf.keras.layers.Dense(NUM_CATEGORIES * 8, activation='relu'),
+
+        # Output layer.
+        tf.keras.layers.Dense(NUM_CATEGORIES, activation='softmax')
     ])
 
-    # Compile the model.
-    model.compile(optimizer='adam',
-                  loss=tf.keras.losses.BinaryCrossentropy(from_logits=True),
-                  metrics=['accuracy'])
+    # Compile.
+    model.compile(
+        optimizer='adam',
+        loss='categorical_crossentropy',
+        metrics=['accuracy']
+    )
 
     return model
 
